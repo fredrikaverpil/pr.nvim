@@ -12,7 +12,7 @@ end
 
 --- Get the git commit SHA from where the cursor is at.
 ---@return string|nil The git commit SHA or nil if not found
-function M.get_git_commit_sha()
+local function get_git_commit_sha()
 	local cursor_at_line = vim.api.nvim_win_get_cursor(0)[1]
 	-- example command: $ git blame -l -L 2,2 -s README.md
 	local cmd = { "git", "blame", "-l", "-L", cursor_at_line .. "," .. cursor_at_line, "-s", vim.fn.expand("%") }
@@ -26,7 +26,7 @@ end
 
 --- Get the remote origin URL of the git repository.
 ---@return string|nil The remote origin URL or nil if not found.
-function M.get_git_remote_url()
+local function get_git_remote_url()
 	-- example command: $ git remote get-url origin
 	local cmd = { "git", "remote", "get-url", "origin" }
 	local obj = vim.system(cmd, { text = true }):wait()
@@ -38,7 +38,7 @@ end
 
 --- Open the PR URL in the browser.
 ---@param url string The URL to open
-function M.open_url(url)
+local function open_in_browser(url)
 	local cmd
 	if vim.fn.has("win32") == 1 then
 		cmd = { "cmd.exe", "/c", "start", url }
@@ -62,12 +62,12 @@ end
 --- Get the PRs for the current git commit SHA.
 --- Based on the hostname of the remote origin URL, it will use the corresponding API.
 function M.open()
-	local sha = M.get_git_commit_sha()
+	local sha = get_git_commit_sha()
 	if not sha then
 		return
 	end
 
-	local remote_url = M.get_git_remote_url()
+	local remote_url = get_git_remote_url()
 	if not remote_url then
 		return
 	end
@@ -83,7 +83,7 @@ function M.open()
 	end
 
 	if pr_url then
-		M.open_url(pr_url)
+		open_in_browser(pr_url)
 	end
 end
 
