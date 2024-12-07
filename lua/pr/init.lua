@@ -3,7 +3,7 @@ local M = {}
 
 function M.setup(_)
 	vim.api.nvim_create_user_command("PROpen", function(_)
-		require("pr").open_pr()
+		require("pr").open()
 	end, {
 		desc = "Open pull request in browser",
 		nargs = "?", -- Optional arguments
