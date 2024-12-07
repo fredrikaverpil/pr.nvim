@@ -1,8 +1,3 @@
--- curl -s "https://api.github.com/repos/fredrikaverpil/neotest-golang/commits/abc123/pulls" \
---  -H "Accept: application/vnd.github.v3+json"
---
--- Then get each object returned, and access its "html_url" field for the PR.
-
 local curl = require("plenary.curl")
 
 local M = {}
