@@ -18,6 +18,7 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+    opts = {},
     keys = {
       {
         "<leader>o",
