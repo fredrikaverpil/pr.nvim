@@ -18,22 +18,27 @@ end
 function M.open()
 	local sha = PRLIB.get_git_commit_sha()
 	if not sha then
+		vim.notify("could not get git commit SHA", vim.log.levels.WARNING)
 		return
 	end
 
 	local remote_url = PRLIB.get_git_remote_url()
 	if not remote_url then
+		vim.notify("could not get git remote URL", vim.log.levels.WARNING)
 		return
 	end
 
 	local hostname = remote_url:match("https?://([^/]+)")
 	if not hostname then
+		vim.notify("could not get hostname from remote URL: " .. vim.inspect(remote_url), vim.log.levels.WARNING)
 		return
 	end
 
 	local pr_url
 	if hostname == "github.com" then
 		pr_url = require("pr.github").get_pr_url(remote_url, sha)
+	else
+		vim.notify("unsupported hostname: " .. hostname, vim.log.levels.WARNING)
 	end
 
 	if pr_url then
