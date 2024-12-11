@@ -1,7 +1,13 @@
 PRLIB = require("pr.lib")
 
+---@class PR
 local M = {}
 
+---@class PR.Config
+---@field token string|fun():string|nil The GitHub token for private repositories (optional)
+
+--- Setup the PR plugin.
+---@param opts? PR.Config
 function M.setup(opts)
 	opts = opts or {}
 	M.opts = opts

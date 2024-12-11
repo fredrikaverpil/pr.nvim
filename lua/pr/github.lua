@@ -5,7 +5,7 @@ local M = {}
 --- Get the GitHub pull request URL for the given git remote and commit SHA.
 ---@param url string The remote URL, e.g. https://github.com/fredrikaverpil/neotest-golang.git
 ---@param sha string The commit SHA, e.g. 123abc
----@param token string|nil The GitHub token for private repositories (optional)
+---@param token string|fun():string|nil The GitHub token for private repositories (optional)
 function M.get_pr_url(url, sha, token)
 	local owner_repo = string.match(url, "github.com/([^/]+/[^/]+)%.git")
 	if not owner_repo then
