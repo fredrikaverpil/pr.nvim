@@ -4,6 +4,7 @@ Open pull request, related to line under cursor, in web browser.
 
 ## Features ⭐
 
+- Repositories cloned down with https or ssh.
 - GitHub pull requests.
 
 ## Install 🚀
