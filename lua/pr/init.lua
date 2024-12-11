@@ -15,7 +15,7 @@ function M.setup(opts)
 	vim.api.nvim_create_user_command("PRView", function(_)
 		require("pr").view()
 	end, {
-		desc = "Open pull request in browser",
+		desc = "View pull request in browser",
 		nargs = "?", -- Optional arguments
 	})
 end
