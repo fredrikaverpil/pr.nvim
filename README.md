@@ -39,9 +39,12 @@ return {
 
 ### `token`
 
-The token required for the API, if e.g. querying private repositories. Best
-practice: don't store the token as a string directly in your config. For
-example, use a password manager or `os.getenv`.
+The token required for the API, if e.g. querying private repositories.
+
+> [!WARNING]
+>
+> Don't store the token as a string directly in your config. For example, use a
+> password manager or `os.getenv`.
 
 Example use with 1Password:
 
