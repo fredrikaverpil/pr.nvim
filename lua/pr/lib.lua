@@ -26,6 +26,17 @@ function M.get_git_remote_url()
 	end
 end
 
+--- Transform git+ssh URL to https URL
+---@param url string
+---@return string
+function M.transform_ssh_to_https(url)
+	local user_repo = url:match("git@[^:]+:(.+)")
+	if user_repo then
+		return "https://github.com/" .. user_repo
+	end
+	return url
+end
+
 --- Open the PR URL in the browser.
 ---@param url string The URL to open
 function M.open_in_browser(url)

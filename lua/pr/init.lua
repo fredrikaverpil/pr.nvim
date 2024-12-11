@@ -28,7 +28,12 @@ function M.open()
 		return
 	end
 
-	local hostname = remote_url:match("https?://([^/]+)")
+	if remote_url:match("^git@") then
+		remote_url = PRLIB.transform_ssh_to_https(remote_url)
+	end
+
+	-- hostname is meant to decide which strategy/API to use.
+	local hostname = remote_url:match("https?://([^/]+)") or remote_url:match("git@([^:]+):")
 	if not hostname then
 		vim.notify("could not get hostname from remote URL: " .. vim.inspect(remote_url), vim.log.levels.WARNING)
 		return
