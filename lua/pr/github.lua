@@ -14,17 +14,21 @@ function M.get_pr_url(url, sha, token)
 
 	local api_url = "https://api.github.com/repos/" .. owner_repo .. "/commits/" .. sha .. "/pulls"
 
-	vim.notify(api_url)
-
 	local headers = { Accept = "application/vnd.github.v3+json" }
-	if token then
-		if type(M.token) == "function" then
-			M.opts.token = M.token()
+	if token ~= nil then
+		if type(token) == "function" then
+			token = token()
 		end
 		headers["Authorization"] = "token " .. token
 	end
 
 	local response = curl.get(api_url, { headers = headers })
+
+	if response.status ~= 200 then
+		vim.notify("Failed to get PRs: " .. response.body, vim.log.levels.ERROR)
+		return
+	end
+
 	local prs = vim.fn.json_decode(response.body)
 	for _, pr in ipairs(prs) do
 		if pr.html_url then

@@ -14,11 +14,24 @@ Open pull request, related to line under cursor, in web browser.
 return {
   {
     "fredrikaverpil/pr.nvim",
-    lazy = false,
+    lazy = true,
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    opts = {},
+
+    ---@type PR.Config
+    opts = {
+      token = function()
+        local cmd = { "op", "read", "op://Personal/github.com/tokens/pr.nvim", "--no-newline" }
+        local obj = vim.system(cmd, { text = true }):wait()
+        if obj.code ~= 0 then
+          vim.notify("Failed to get token from 1Password", vim.log.levels.ERROR)
+          return nil
+        end
+        return obj.stdout
+      end,
+    },
+
     keys = {
       {
         "<leader>o",
@@ -28,15 +41,13 @@ return {
         desc = "Open PR",
       },
     },
+    cmd = { "PROpen" },
   },
 }
 ```
 
-## Usage 🤙
-
-Either define a keymap (example above), or execute `:PROpen`.
-
 ## Custom opts ⚙️
 
 - `token`: the token required for the API, if e.g. querying private
-  repositories.
+  repositories. Best practice: don't store the token as a string directly in
+  your config. For example, use a password manager or `os.getenv`.
