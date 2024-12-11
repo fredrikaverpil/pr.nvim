@@ -1,9 +1,11 @@
 PRLIB = require("pr.lib")
 
----@class PR
 local M = {}
 
-function M.setup(_)
+function M.setup(opts)
+	opts = opts or {}
+	M.opts = opts
+
 	vim.api.nvim_create_user_command("PROpen", function(_)
 		require("pr").open()
 	end, {
@@ -41,7 +43,7 @@ function M.open()
 
 	local pr_url
 	if hostname == "github.com" then
-		pr_url = require("pr.github").get_pr_url(remote_url, sha)
+		pr_url = require("pr.github").get_pr_url(remote_url, sha, M.opts.token)
 	else
 		vim.notify("unsupported hostname: " .. hostname, vim.log.levels.WARNING)
 	end

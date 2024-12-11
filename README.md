@@ -35,3 +35,8 @@ return {
 ## Usage 🤙
 
 Either define a keymap (example above), or execute `:PROpen`.
+
+## Custom opts ⚙️
+
+- `token`: the token required for the API, if e.g. querying private
+  repositories.
