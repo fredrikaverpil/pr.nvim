@@ -37,6 +37,7 @@ function M.get_pr_url(url, sha, token)
 		end
 	end
 
+	vim.notify("No PR found for commit SHA: " .. sha, vim.log.levels.INFO)
 	return nil
 end
 
