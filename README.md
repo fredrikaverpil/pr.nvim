@@ -23,9 +23,9 @@ return {
     opts = {},
     keys = {
       {
-        "<leader>o",
+        "<leader>gv",
         function()
-          require("pr").open()
+          require("pr").view()
         end,
         desc = "View PR in browser",
       },

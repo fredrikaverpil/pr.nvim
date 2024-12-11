@@ -13,17 +13,15 @@ function M.setup(opts)
 	M.opts = opts
 
 	vim.api.nvim_create_user_command("PRView", function(_)
-		require("pr").open()
+		require("pr").view()
 	end, {
 		desc = "Open pull request in browser",
 		nargs = "?", -- Optional arguments
 	})
 end
 
---- Main function
---- Get the PRs for the current git commit SHA.
---- Based on the hostname of the remote origin URL, it will use the corresponding API.
-function M.open()
+--- View the pull request in the browser.
+function M.view()
 	local sha = PRLIB.get_git_commit_sha()
 	if not sha then
 		vim.notify("could not get git commit SHA", vim.log.levels.WARNING)
@@ -41,7 +39,7 @@ function M.open()
 	end
 
 	-- hostname is meant to decide which strategy/API to use.
-	local hostname = remote_url:match("https?://([^/]+)") or remote_url:match("git@([^:]+):")
+	local hostname = remote_url:match("https?://([^/]+)")
 	if not hostname then
 		vim.notify("could not get hostname from remote URL: " .. vim.inspect(remote_url), vim.log.levels.WARNING)
 		return
