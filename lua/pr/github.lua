@@ -9,6 +9,7 @@ local M = {}
 function M.get_pr_url(url, sha, token)
 	local owner_repo = string.match(url, "github.com/([^/]+/[^/]+)%.git")
 	if not owner_repo then
+		vim.notify("Failed to get owner/repo from URL: " .. url, vim.log.levels.ERROR)
 		return
 	end
 
