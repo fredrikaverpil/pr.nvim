@@ -39,7 +39,7 @@ return {
         function()
           require("pr").open()
         end,
-        desc = "Open PR",
+        desc = "View PR in browser",
       },
     },
     cmd = { "PRView" },
