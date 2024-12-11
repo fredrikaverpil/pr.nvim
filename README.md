@@ -1,6 +1,6 @@
 # pr.nvim
 
-Open pull request, related to line under cursor, in web browser.
+View pull request, related to line under cursor, in web browser.
 
 ## Features ⭐
 
@@ -42,7 +42,7 @@ return {
         desc = "Open PR",
       },
     },
-    cmd = { "PROpen" },
+    cmd = { "PRView" },
   },
 }
 ```

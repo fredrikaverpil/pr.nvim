@@ -12,7 +12,7 @@ function M.setup(opts)
 	opts = opts or {}
 	M.opts = opts
 
-	vim.api.nvim_create_user_command("PROpen", function(_)
+	vim.api.nvim_create_user_command("PRView", function(_)
 		require("pr").open()
 	end, {
 		desc = "Open pull request in browser",
