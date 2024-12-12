@@ -10,7 +10,8 @@ View pull request, related to line under cursor, in web browser.
 ## Requirements
 
 - Neovim version 0.10.0 and higher.
-- Curl (via [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)).
+- For GitHub PRs: [`gh-cli`](https://cli.github.com/) or curl (via
+  [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)).
 
 ## Install 🚀
 
@@ -21,7 +22,6 @@ return {
   {
     "fredrikaverpil/pr.nvim",
     lazy = true,
-    dependencies = { "nvim-lua/plenary.nvim" },
     version = "*",
     ---@type PR.Config
     opts = {},
@@ -43,10 +43,18 @@ return {
 
 ### `github_token` (optional)
 
-The personal access token
-([PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens),
+Out of the box, `gh-cli` will be used to query for pull requests. This should be
+sufficient to e.g. access private repositories. Example:
+
+```bash
+gh api repos/fredrikaverpil/pr.nvim/commits/c0765e2b0fd44494f1ec19b58c90e4381afbea28/pulls
+```
+
+If you would rather use a personal access token (a
+[PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens),
 managed [in your GitHub settings/tokens](https://github.com/settings/tokens)),
-required for querying private repositories.
+you can define the `github_token` option. You will then also have to add the
+dependency to `nvim-lua/plenary.nvim`.
 
 > [!WARNING]
 >
@@ -56,15 +64,19 @@ required for querying private repositories.
 Example use with 1Password:
 
 ```lua
-opts = {
-  github_token = function()
-    local cmd = { "op", "read", "op://Personal/github.com/tokens/pr.nvim", "--no-newline" }
-    local obj = vim.system(cmd, { text = true }):wait()
-    if obj.code ~= 0 then
-      vim.notify("Failed to get token from 1Password", vim.log.levels.ERROR)
-      return nil
-    end
-    return obj.stdout
-  end
+return {
+  "fredrikaverpil/pr.nvim",
+  dependencies = { "nvim-lua/plenary.nvim" },
+  opts = {
+    github_token = function()
+      local cmd = { "op", "read", "op://Personal/github.com/tokens/pr.nvim", "--no-newline" }
+      local obj = vim.system(cmd, { text = true }):wait()
+      if obj.code ~= 0 then
+        vim.notify("Failed to get token from 1Password", vim.log.levels.ERROR)
+        return nil
+      end
+      return obj.stdout
+    end,
+  },
 }
 ```
