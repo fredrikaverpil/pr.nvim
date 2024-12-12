@@ -10,7 +10,7 @@ View pull request, related to line under cursor, in web browser.
 ## Requirements
 
 - Neovim version 0.10.0 and higher.
-- For GitHub PRs: [`gh-cli`](https://cli.github.com/) or curl (via
+- For GitHub PRs: [`gh-cli`](https://cli.github.com/) (or alternatively, `curl` via
   [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)).
 
 ## Install 🚀
