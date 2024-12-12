@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.0...v2.0.1) (2024-12-12)
+
+
+### Bug Fixes
+
+* nilcheck ([#10](https://github.com/fredrikaverpil/pr.nvim/issues/10)) ([f885ec3](https://github.com/fredrikaverpil/pr.nvim/commit/f885ec31e6bb84546cb0cc167db033b5e7827dab))
+
 ## [2.0.0](https://github.com/fredrikaverpil/pr.nvim/compare/v1.0.0...v2.0.0) (2024-12-12)
 
 
