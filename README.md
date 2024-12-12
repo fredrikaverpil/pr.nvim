@@ -7,6 +7,11 @@ View pull request, related to line under cursor, in web browser.
 - Supports git repositories cloned down with https or ssh.
 - GitHub pull requests.
 
+## Requirements
+
+- Neovim version 0.10.0 and higher.
+- Curl (via [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)).
+
 ## Install 🚀
 
 ### Lazy.nvim 💤
