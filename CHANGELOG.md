@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.2...v2.0.3) (2024-12-12)
+
+
+### Bug Fixes
+
+* ignore trailing .git in repo name ([#16](https://github.com/fredrikaverpil/pr.nvim/issues/16)) ([6a886be](https://github.com/fredrikaverpil/pr.nvim/commit/6a886bed5faa0f05e4cb27b3f5d373a8c5c21b98))
+
 ## [2.0.2](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.1...v2.0.2) (2024-12-12)
 
 
