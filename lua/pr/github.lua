@@ -50,7 +50,7 @@ function M.get_pr_url(url, sha, token)
 	end
 
 	---@type table|nil
-	local json_response = {}
+	local json_response
 
 	-- if token was provided, use curl.
 	if token ~= nil then
@@ -63,9 +63,11 @@ function M.get_pr_url(url, sha, token)
 	end
 
 	-- local prs = vim.fn.json_decode(response.body)
-	for _, pr in ipairs(json_response) do
-		if pr.html_url then
-			return pr.html_url
+	if json_response ~= nil then
+		for _, pr in ipairs(json_response) do
+			if pr.html_url then
+				return pr.html_url
+			end
 		end
 	end
 
