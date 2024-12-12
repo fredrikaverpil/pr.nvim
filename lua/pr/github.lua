@@ -43,11 +43,13 @@ end
 ---@param token string|fun():string|nil The GitHub token for private repositories (optional)
 ---@return string|nil
 function M.get_pr_url(url, sha, token)
-	local owner_repo = string.match(url, "github.com/([^/]+/[^/]+)%.git")
+	local owner_repo = string.match(url, "github.com/([^/]+/[^/]+)")
 	if not owner_repo then
 		vim.notify("Failed to get owner/repo from URL: " .. url, vim.log.levels.ERROR)
 		return
 	end
+	-- HACK: strip out any trailing ".git", which could be unreliable if the repo name actually contains a trailing ".git"
+	owner_repo = string.gsub(owner_repo, "%.git$", "")
 
 	---@type table|nil
 	local json_response
