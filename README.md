@@ -21,9 +21,8 @@ return {
   {
     "fredrikaverpil/pr.nvim",
     lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
+    dependencies = { "nvim-lua/plenary.nvim" },
+    version = "*",
     ---@type PR.Config
     opts = {},
     keys = {
@@ -42,9 +41,12 @@ return {
 
 ## Custom opts ⚙️
 
-### `token`
+### `github_token` (optional)
 
-The token required for the API, if e.g. querying private repositories.
+The personal access token
+([PAT](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens),
+managed [in your GitHub settings/tokens](https://github.com/settings/tokens)),
+required for querying private repositories.
 
 > [!WARNING]
 >
@@ -55,7 +57,7 @@ Example use with 1Password:
 
 ```lua
 opts = {
-  token = function()
+  github_token = function()
     local cmd = { "op", "read", "op://Personal/github.com/tokens/pr.nvim", "--no-newline" }
     local obj = vim.system(cmd, { text = true }):wait()
     if obj.code ~= 0 then
