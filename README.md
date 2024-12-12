@@ -2,6 +2,8 @@
 
 View pull request, related to line under cursor, in web browser.
 
+https://github.com/user-attachments/assets/b73336cf-329c-4e1d-9f83-457ae111f6d9
+
 ## Features
 
 - Supports git repositories cloned down with https or ssh.
