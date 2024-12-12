@@ -49,14 +49,10 @@ function M.open_in_browser(url)
 		cmd = { "xdg-open", url }
 	end
 
-	vim.fn.jobstart(cmd, {
-		detach = true,
-		on_stderr = function(_, data)
-			if data then
-				print("Error opening URL: " .. vim.inspect(data))
-			end
-		end,
-	})
+	local obj = vim.system(cmd, { text = true }):wait()
+	if obj.code ~= 0 then
+		vim.notify("Failed to open URL: " .. url .. "\n" .. vim.inspect(obj.stderr), vim.log.levels.ERROR)
+	end
 end
 
 return M
