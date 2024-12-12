@@ -1,8 +1,8 @@
-# pr.nvim
+# pr.nvim 🪁
 
 View pull request, related to line under cursor, in web browser.
 
-## Features ⭐
+## Features
 
 - Supports git repositories cloned down with https or ssh.
 - GitHub pull requests.
@@ -10,10 +10,10 @@ View pull request, related to line under cursor, in web browser.
 ## Requirements
 
 - Neovim version 0.10.0 and higher.
-- For GitHub PRs: [`gh-cli`](https://cli.github.com/) (or alternatively, `curl` via
-  [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)).
+- For GitHub PRs: [`gh-cli`](https://cli.github.com/) (or alternatively, `curl`
+  via [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)).
 
-## Install 🚀
+## Install
 
 ### Lazy.nvim 💤
 
@@ -39,7 +39,7 @@ return {
 }
 ```
 
-## Custom opts ⚙️
+## Custom opts
 
 ### `github_token` (optional)
 
