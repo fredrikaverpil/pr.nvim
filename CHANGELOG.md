@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.1...v2.0.2) (2024-12-12)
+
+
+### Bug Fixes
+
+* use vim.system for cmd opening in browser ([#13](https://github.com/fredrikaverpil/pr.nvim/issues/13)) ([7657c33](https://github.com/fredrikaverpil/pr.nvim/commit/7657c33edc9b86720a6c3d401aa567924d99447d))
+
 ## [2.0.1](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.0...v2.0.1) (2024-12-12)
 
 
