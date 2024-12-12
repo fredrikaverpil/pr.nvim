@@ -4,7 +4,7 @@ PRLIB = require("pr.lib")
 local M = {}
 
 ---@class PR.Config
----@field token string|fun():string|nil The GitHub token for private repositories (optional)
+---@field github_token string|fun():string|nil The GitHub token for private repositories (optional)
 
 --- Setup the PR plugin.
 ---@param opts? PR.Config
@@ -47,7 +47,7 @@ function M.view()
 
 	local pr_url
 	if hostname == "github.com" then
-		pr_url = require("pr.github").get_pr_url(remote_url, sha, M.opts.token)
+		pr_url = require("pr.github").get_pr_url(remote_url, sha, M.opts.github_token)
 	else
 		vim.notify("unsupported hostname: " .. hostname, vim.log.levels.WARNING)
 	end
