@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.3...v2.0.4) (2025-01-04)
+
+
+### Bug Fixes
+
+* type is optional ([#19](https://github.com/fredrikaverpil/pr.nvim/issues/19)) ([775b5dc](https://github.com/fredrikaverpil/pr.nvim/commit/775b5dc6249461e03b69f819a94b693e0fe8bbbc))
+
 ## [2.0.3](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.2...v2.0.3) (2024-12-12)
 
 
