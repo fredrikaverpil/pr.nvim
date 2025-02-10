@@ -4,13 +4,26 @@ M = {}
 ---@return string|nil The git commit SHA or nil if not found
 function M.get_git_commit_sha()
 	local cursor_at_line = vim.api.nvim_win_get_cursor(0)[1]
-	-- example command: $ git blame -l -L 2,2 -s README.md
-	local cmd = { "git", "blame", "-l", "-L", cursor_at_line .. "," .. cursor_at_line, "-s", vim.fn.expand("%") }
-	local obj = vim.system(cmd, { text = true }):wait()
-	if obj.code == 0 then
-		-- the first word is the commit sha
-		local sha = vim.split(obj.stdout, " ")[1]
-		return sha
+	-- use git rev-parse to determine git root
+	local git_root_cmd = { "git", "-C", vim.fn.expand("%:p:h"), "rev-parse", "--show-toplevel" }
+	local git_root_obj = vim.system(git_root_cmd, { text = true }):wait()
+	if git_root_obj.code ~= 0 then
+		return nil
+	end
+	local git_root = vim.trim(git_root_obj.stdout)
+	-- run blame based on the git root found
+	local blame_cmd = {
+		"git",
+		"-C", git_root,
+		"blame",
+		"-l",
+		"-L", cursor_at_line .. "," .. cursor_at_line,
+		"-s",
+		vim.fn.expand("%:p")
+	}
+	local blame_obj = vim.system(blame_cmd, { text = true }):wait()
+	if blame_obj.code == 0 then
+		return vim.split(blame_obj.stdout, " ")[1]
 	end
 end
 
