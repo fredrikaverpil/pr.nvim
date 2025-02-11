@@ -34,7 +34,7 @@ function M.view()
 		return
 	end
 
-	local remote_url = PRLIB.get_git_remote_url()
+	local remote_url = PRLIB.get_git_remote_url(git_root)
 	if not remote_url then
 		vim.notify("could not get git remote URL", vim.log.levels.WARNING)
 		return

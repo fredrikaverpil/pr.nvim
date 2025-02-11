@@ -33,10 +33,10 @@ function M.get_git_commit_sha(git_root)
 end
 
 --- Get the remote origin URL of the git repository.
+---@param git_root string The git root directory
 ---@return string|nil The remote origin URL or nil if not found.
-function M.get_git_remote_url()
-	-- example command: $ git remote get-url origin
-	local cmd = { "git", "remote", "get-url", "origin" }
+function M.get_git_remote_url(git_root)
+	local cmd = { "git", "-C", git_root, "remote", "get-url", "origin" }
 	local obj = vim.system(cmd, { text = true }):wait()
 	if obj.code == 0 then
 		local url = vim.trim(obj.stdout)
