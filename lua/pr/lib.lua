@@ -14,12 +14,14 @@ function M.get_git_commit_sha()
 	-- run blame based on the git root found
 	local blame_cmd = {
 		"git",
-		"-C", git_root,
+		"-C",
+		git_root,
 		"blame",
 		"-l",
-		"-L", cursor_at_line .. "," .. cursor_at_line,
+		"-L",
+		cursor_at_line .. "," .. cursor_at_line,
 		"-s",
-		vim.fn.expand("%:p")
+		vim.fn.expand("%:p"),
 	}
 	local blame_obj = vim.system(blame_cmd, { text = true }):wait()
 	if blame_obj.code == 0 then
