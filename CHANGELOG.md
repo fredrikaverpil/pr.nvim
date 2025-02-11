@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.0](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.4...v2.1.0) (2025-02-11)
+
+
+### Features
+
+* use git root when getting remote url ([#25](https://github.com/fredrikaverpil/pr.nvim/issues/25)) ([e94e358](https://github.com/fredrikaverpil/pr.nvim/commit/e94e358e3485a5eadeed41c4ff77050db6caaa68))
+* view pull requests from files in other repos ([#21](https://github.com/fredrikaverpil/pr.nvim/issues/21)) ([20bc51b](https://github.com/fredrikaverpil/pr.nvim/commit/20bc51be60e28345943f658bdca56c6bfb052e3b))
+
 ## [2.0.4](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.3...v2.0.4) (2025-01-04)
 
 
