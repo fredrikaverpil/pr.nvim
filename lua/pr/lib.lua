@@ -1,17 +1,20 @@
 M = {}
 
---- Get the git commit SHA from where the cursor is at.
----@return string|nil The git commit SHA or nil if not found
-function M.get_git_commit_sha()
-	local cursor_at_line = vim.api.nvim_win_get_cursor(0)[1]
-	-- use git rev-parse to determine git root
-	local git_root_cmd = { "git", "-C", vim.fn.expand("%:p:h"), "rev-parse", "--show-toplevel" }
-	local git_root_obj = vim.system(git_root_cmd, { text = true }):wait()
-	if git_root_obj.code ~= 0 then
-		return nil
+--- Get the git root directory.
+---@return string|nil The git root directory or nil if not found
+function M.get_git_root()
+	local cmd = { "git", "-C", vim.fn.expand("%:p:h"), "rev-parse", "--show-toplevel" }
+	local obj = vim.system(cmd, { text = true }):wait()
+	if obj.code == 0 then
+		return vim.trim(obj.stdout)
 	end
-	local git_root = vim.trim(git_root_obj.stdout)
-	-- run blame based on the git root found
+end
+
+--- Get the git commit SHA from where the cursor is at.
+---@param git_root string The git root directory
+---@return string|nil The git commit SHA or nil if not found
+function M.get_git_commit_sha(git_root)
+	local cursor_at_line = vim.api.nvim_win_get_cursor(0)[1]
 	local blame_cmd = {
 		"git",
 		"-C",

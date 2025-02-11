@@ -22,7 +22,13 @@ end
 
 --- View the pull request in the browser.
 function M.view()
-	local sha = PRLIB.get_git_commit_sha()
+	local git_root = PRLIB.get_git_root()
+	if not git_root then
+		vim.notify("could not get git root directory", vim.log.levels.ERROR)
+		return
+	end
+
+	local sha = PRLIB.get_git_commit_sha(git_root)
 	if not sha then
 		vim.notify("could not get git commit SHA", vim.log.levels.WARNING)
 		return
