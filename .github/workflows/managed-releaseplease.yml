@@ -1,0 +1,16 @@
+# MANAGED BY fredrikaverpil/github - DO NOT EDIT
+# This file is automatically updated during sync operations
+# Source: https://github.com/fredrikaverpil/github
+
+name: release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  title:
+    uses: fredrikaverpil/github/.github/workflows/release-please.yml@main
+    secrets: inherit
