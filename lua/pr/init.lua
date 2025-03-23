@@ -9,58 +9,62 @@ local M = {}
 --- Setup the PR plugin.
 ---@param opts? PR.Config
 function M.setup(opts)
-	opts = opts or {}
-	M.opts = opts
+  opts = opts or {}
+  M.opts = opts
 
-	vim.api.nvim_create_user_command("PRView", function(_)
-		require("pr").view()
-	end, {
-		desc = "View pull request in browser",
-		nargs = "?", -- Optional arguments
-	})
+  vim.api.nvim_create_user_command("PRView", function(_)
+    require("pr").view()
+  end, {
+    desc = "View pull request in browser",
+    nargs = "?", -- Optional arguments
+  })
 end
 
 --- View the pull request in the browser.
 function M.view()
-	local git_root = PRLIB.get_git_root()
-	if not git_root then
-		vim.notify("could not get git root directory", vim.log.levels.ERROR)
-		return
-	end
+  local git_root = PRLIB.get_git_root()
+  if not git_root then
+    vim.notify("could not get git root directory", vim.log.levels.ERROR)
+    return
+  end
 
-	local sha = PRLIB.get_git_commit_sha(git_root)
-	if not sha then
-		vim.notify("could not get git commit SHA", vim.log.levels.WARNING)
-		return
-	end
+  local sha = PRLIB.get_git_commit_sha(git_root)
+  if not sha then
+    vim.notify("could not get git commit SHA", vim.log.levels.WARNING)
+    return
+  end
 
-	local remote_url = PRLIB.get_git_remote_url(git_root)
-	if not remote_url then
-		vim.notify("could not get git remote URL", vim.log.levels.WARNING)
-		return
-	end
+  local remote_url = PRLIB.get_git_remote_url(git_root)
+  if not remote_url then
+    vim.notify("could not get git remote URL", vim.log.levels.WARNING)
+    return
+  end
 
-	if remote_url:match("^git@") then
-		remote_url = PRLIB.transform_ssh_to_https(remote_url)
-	end
+  if remote_url:match("^git@") then
+    remote_url = PRLIB.transform_ssh_to_https(remote_url)
+  end
 
-	-- hostname is meant to decide which strategy/API to use.
-	local hostname = remote_url:match("https?://([^/]+)")
-	if not hostname then
-		vim.notify("could not get hostname from remote URL: " .. vim.inspect(remote_url), vim.log.levels.WARNING)
-		return
-	end
+  -- hostname is meant to decide which strategy/API to use.
+  local hostname = remote_url:match("https?://([^/]+)")
+  if not hostname then
+    vim.notify(
+      "could not get hostname from remote URL: " .. vim.inspect(remote_url),
+      vim.log.levels.WARNING
+    )
+    return
+  end
 
-	local pr_url
-	if hostname == "github.com" then
-		pr_url = require("pr.github").get_pr_url(remote_url, sha, M.opts.github_token)
-	else
-		vim.notify("unsupported hostname: " .. hostname, vim.log.levels.WARNING)
-	end
+  local pr_url
+  if hostname == "github.com" then
+    pr_url =
+      require("pr.github").get_pr_url(remote_url, sha, M.opts.github_token)
+  else
+    vim.notify("unsupported hostname: " .. hostname, vim.log.levels.WARNING)
+  end
 
-	if pr_url then
-		PRLIB.open_in_browser(pr_url)
-	end
+  if pr_url then
+    PRLIB.open_in_browser(pr_url)
+  end
 end
 
 return M
