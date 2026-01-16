@@ -10,7 +10,7 @@ import (
 var Config = pocket.Config{
 	AutoRun: pocket.Serial(
 		// Lua workflow (format)
-		pocket.Paths(lua.Workflow()).DetectBy(lua.Detect()),
+		pocket.Paths(lua.Tasks()).DetectBy(lua.Detect()),
 	),
 	ManualRun: []pocket.Runnable{
 		github.Workflows,
