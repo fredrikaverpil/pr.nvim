@@ -13,7 +13,9 @@ var Config = pocket.Config{
 			lua.Tasks(),
 			pocket.Detect(lua.Detect()),
 		),
-		github.Workflows,
+		pocket.WithOpts(github.Workflows, github.WorkflowsOptions{
+			Platforms: "ubuntu-latest",
+		}),
 	),
 	Shim: &pocket.ShimConfig{
 		Posix: true,
