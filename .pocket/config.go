@@ -13,10 +13,8 @@ var Config = pocket.Config{
 			lua.Tasks(),
 			pocket.Detect(lua.Detect()),
 		),
-	),
-	ManualRun: []pocket.Runnable{
 		github.Workflows,
-	},
+	),
 	Shim: &pocket.ShimConfig{
 		Posix: true,
 	},
