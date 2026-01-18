@@ -9,8 +9,10 @@ import (
 // Config is the pocket configuration for this project.
 var Config = pocket.Config{
 	AutoRun: pocket.Serial(
-		// Lua workflow (format)
-		pocket.Paths(lua.Tasks()).DetectBy(lua.Detect()),
+		pocket.RunIn(
+			lua.Tasks(),
+			pocket.Detect(lua.Detect()),
+		),
 	),
 	ManualRun: []pocket.Runnable{
 		github.Workflows,
