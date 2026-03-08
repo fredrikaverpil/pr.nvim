@@ -82,3 +82,11 @@ return {
   },
 }
 ```
+
+## Contributors
+
+To run tests, linting etc:
+
+```sh
+./pok
+```
