@@ -1,23 +1,30 @@
 package main
 
 import (
-	"github.com/fredrikaverpil/pocket"
+	"github.com/fredrikaverpil/pocket/pk"
 	"github.com/fredrikaverpil/pocket/tasks/github"
 	"github.com/fredrikaverpil/pocket/tasks/lua"
 )
 
-// Config is the pocket configuration for this project.
-var Config = pocket.Config{
-	AutoRun: pocket.Serial(
-		pocket.RunIn(
+// Config is the Pocket configuration for this project.
+var Config = &pk.Config{
+	Auto: pk.Serial(
+		pk.WithOptions(
 			lua.Tasks(),
-			pocket.Detect(lua.Detect()),
+			pk.WithDetect(lua.Detect()),
 		),
-		pocket.WithOpts(github.Workflows, github.WorkflowsOptions{
-			Platforms: "ubuntu-latest",
-		}),
+		pk.WithOptions(
+			github.Tasks(),
+			pk.WithFlags(github.WorkflowFlags{
+				Platforms: []github.Platform{github.Ubuntu},
+			}),
+		),
 	),
-	Shim: &pocket.ShimConfig{
-		Posix: true,
+
+	// Plan configuration.
+	Plan: &pk.PlanConfig{
+		Shims: &pk.ShimConfig{
+			Posix: true,
+		},
 	},
 }
