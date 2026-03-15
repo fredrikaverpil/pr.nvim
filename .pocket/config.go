@@ -20,11 +20,4 @@ var Config = &pk.Config{
 			}),
 		),
 	),
-
-	// Plan configuration.
-	Plan: &pk.PlanConfig{
-		Shims: &pk.ShimConfig{
-			Posix: true,
-		},
-	},
 }
