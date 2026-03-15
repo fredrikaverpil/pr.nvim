@@ -20,9 +20,4 @@ var Config = &pk.Config{
 			}),
 		),
 	),
-
-	// Plan configuration.
-	Plan: &pk.PlanConfig{
-		Shims: pk.DefaultShimConfig(),
-	},
 }
