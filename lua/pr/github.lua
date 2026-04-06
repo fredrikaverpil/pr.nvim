@@ -67,12 +67,11 @@ function M.get_pr_url(url, sha, token)
     json_response = curl_api(owner_repo, sha, token)
   elseif vim.fn.executable("gh") == 1 then
     json_response = call_api_via_gh(owner_repo, sha)
-  elseif vim.fn.executable("gh") == 0 then
+  else
     vim.notify("gh is not installed", vim.log.levels.ERROR)
     return
   end
 
-  -- local prs = vim.fn.json_decode(response.body)
   if json_response ~= nil then
     for _, pr in ipairs(json_response) do
       if pr.html_url then

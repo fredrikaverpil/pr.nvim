@@ -1,4 +1,4 @@
-M = {}
+local M = {}
 
 --- Get the git root directory.
 ---@return string|nil The git root directory or nil if not found
