@@ -1,4 +1,4 @@
-PRLIB = require("pr.lib")
+local PRLIB = require("pr.lib")
 
 ---@class PR
 local M = {}
