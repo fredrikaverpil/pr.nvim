@@ -6,18 +6,12 @@ local M = {}
 ---@class PR.Config
 ---@field github_token? string|fun():string|nil The GitHub token for private repositories (optional)
 
---- Setup the PR plugin.
+M.opts = {}
+
+--- Configure the PR plugin.
 ---@param opts? PR.Config
 function M.setup(opts)
-  opts = opts or {}
-  M.opts = opts
-
-  vim.api.nvim_create_user_command("PRView", function(_)
-    require("pr").view()
-  end, {
-    desc = "View pull request in browser",
-    nargs = "?", -- Optional arguments
-  })
+  M.opts = vim.tbl_deep_extend("force", M.opts, opts or {})
 end
 
 --- View the pull request in the browser.
