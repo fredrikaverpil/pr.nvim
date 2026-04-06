@@ -1,5 +1,3 @@
-local PRLIB = require("pr.lib")
-
 ---@class PR
 local M = {}
 
@@ -16,26 +14,27 @@ end
 
 --- View the pull request in the browser.
 function M.view()
-  local git_root = PRLIB.get_git_root()
+  local lib = require("pr.lib")
+  local git_root = lib.get_git_root()
   if not git_root then
     vim.notify("could not get git root directory", vim.log.levels.ERROR)
     return
   end
 
-  local sha = PRLIB.get_git_commit_sha(git_root)
+  local sha = lib.get_git_commit_sha(git_root)
   if not sha then
     vim.notify("could not get git commit SHA", vim.log.levels.WARNING)
     return
   end
 
-  local remote_url = PRLIB.get_git_remote_url(git_root)
+  local remote_url = lib.get_git_remote_url(git_root)
   if not remote_url then
     vim.notify("could not get git remote URL", vim.log.levels.WARNING)
     return
   end
 
   if remote_url:match("^git@") then
-    remote_url = PRLIB.transform_ssh_to_https(remote_url)
+    remote_url = lib.transform_ssh_to_https(remote_url)
   end
 
   -- hostname is meant to decide which strategy/API to use.
@@ -57,7 +56,7 @@ function M.view()
   end
 
   if pr_url then
-    PRLIB.open_in_browser(pr_url)
+    lib.open_in_browser(pr_url)
   end
 end
 

@@ -72,7 +72,6 @@ function M.get_pr_url(url, sha, token)
     return
   end
 
-  -- local prs = vim.fn.json_decode(response.body)
   if json_response ~= nil then
     for _, pr in ipairs(json_response) do
       if pr.html_url then
