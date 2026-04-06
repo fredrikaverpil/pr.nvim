@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/fredrikaverpil/pr.nvim/compare/v2.1.0...v2.1.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* adhere to plugin best practices ([#48](https://github.com/fredrikaverpil/pr.nvim/issues/48)) ([5eb2d40](https://github.com/fredrikaverpil/pr.nvim/commit/5eb2d40d9460990ec2f9c2dfad7cf44f00ebb3ec))
+
 ## [2.1.0](https://github.com/fredrikaverpil/pr.nvim/compare/v2.0.4...v2.1.0) (2025-02-11)
 
 
