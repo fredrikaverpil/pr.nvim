@@ -85,8 +85,12 @@ return {
 
 ## Contributors
 
-To run tests, linting etc:
+This project uses [mise](https://mise.jdx.dev) for formatting and linting tasks.
 
 ```sh
-./pok
+# List tasks
+mise tasks
+
+# Run all checks
+mise run
 ```
