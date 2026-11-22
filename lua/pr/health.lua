@@ -8,14 +8,18 @@ function M.check()
   if ok then
     vim.health.ok("plenary.nvim found (used for token-based auth)")
   else
-    vim.health.warn("plenary.nvim not found — token-based GitHub auth unavailable")
+    vim.health.warn(
+      "plenary.nvim not found — token-based GitHub auth unavailable"
+    )
   end
 
   -- Check gh CLI
   if vim.fn.executable("gh") == 1 then
     vim.health.ok("gh CLI found")
   else
-    vim.health.warn("gh CLI not found — install it or provide a github_token in setup()")
+    vim.health.warn(
+      "gh CLI not found — install it or provide a github_token in setup()"
+    )
   end
 
   -- Check git
